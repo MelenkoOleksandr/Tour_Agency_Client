@@ -1,0 +1,22 @@
+<header>
+  <div class="header-content">
+    <div class="logo">Travely</div>
+    <nav class="header-nav">
+      <ul class="nav-list">
+        <li class="nav-link"><a routerLink="/">Tours</a></li>
+        <li class="nav-link"><a routerLink="/about">About</a></li>
+        <li class="nav-link" *ngIf="user; else login">
+          <button
+            mat-icon-button
+            aria-label="Example icon button with a vertical three dot icon"
+          >
+            <mat-icon>home</mat-icon>
+          </button>
+        </li>
+        <ng-template #login>
+          <a routerLink="/login">Login</a>
+        </ng-template>
+      </ul>
+    </nav>
+  </div>
+</header>

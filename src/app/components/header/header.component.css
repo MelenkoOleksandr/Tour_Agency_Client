@@ -1,0 +1,39 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0c4b9e;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-content {
+  width: min(100%, 1200px);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link a, .nav-link button {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.3s;
+}

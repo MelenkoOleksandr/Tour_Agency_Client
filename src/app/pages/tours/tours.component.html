@@ -1,0 +1,10 @@
+<div class="tours">
+  <app-search></app-search>
+  <section class="tours-container">
+    <h2 class="tours-container__title">Our Tours</h2>
+
+    <div class="tours-container__list">
+      <app-tour-card *ngFor="let tour of tours" [tour]="tour"></app-tour-card>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,13 @@
+<mat-form-field>
+  <input
+    type="text"
+    matInput
+    placeholder="Search"
+    [formControl]="searchControl"
+  />
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let result of filteredResults | async" [value]="result">
+      {{ result.name }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
