@@ -27,9 +27,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
 import { rootReducer } from './store/root.reducer';
-import { initialState } from './store/auth/auth.reducer';
-import { AuthEffects } from './store/auth/auth.effect';
+import { AuthEffects } from './store/auth/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
+
+import { initialState } from './store/root.reducer';
+import { TourEffects } from './store/tour/tour.effects';
 
 @NgModule({
   declarations: [
@@ -57,8 +59,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
-    StoreModule.forRoot(rootReducer, { initialState: { auth: initialState } }),
-    EffectsModule.forRoot(AuthEffects),
+    StoreModule.forRoot(rootReducer, { initialState: initialState }),
+    EffectsModule.forRoot(AuthEffects, TourEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

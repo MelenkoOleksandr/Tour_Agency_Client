@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { AuthResponse, IUserCredentials } from '../models/User';
 import { Observable } from 'rxjs';
 
-
-
 @Injectable({
   providedIn: 'root',
 })
@@ -14,14 +12,20 @@ export class AuthService {
   login(userCredentials: IUserCredentials) {
     return this.http.post(
       'http://localhost:8080/api/auth/login',
-      userCredentials
+      userCredentials,
+      {
+        withCredentials: true,
+      }
     ) as Observable<AuthResponse>;
   }
 
   register(userCredentials: IUserCredentials) {
     return this.http.post(
       'http://localhost:8080/api/auth/register',
-      userCredentials
+      userCredentials,
+      {
+        withCredentials: true,
+      }
     ) as Observable<AuthResponse>;
   }
 }

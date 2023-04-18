@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ITour } from 'src/app/models/Tour';
+import { AppState } from 'src/app/store/root.reducer';
+import { TourActions } from 'src/app/store/tour/tour.actions';
 
 @Component({
   selector: 'app-tours',
   templateUrl: './tours.component.html',
   styleUrls: ['./tours.component.css'],
 })
-export class ToursComponent {
+export class ToursComponent implements OnInit {
   tours: ITour[] = [
     {
       id: 1,
@@ -26,4 +29,17 @@ export class ToursComponent {
       hotDiscount: 1,
     },
   ];
+
+  constructor(private store: Store<AppState>) {
+    this.store
+      .select((state) => state.tour)
+      .subscribe((tourState) => {
+        this.tours = tourState.tours;
+      });
+  }
+
+  ngOnInit() {
+    console.log('ToursComponent.ngOnInit');
+    this.store.dispatch(TourActions.getAllTours());
+  }
 }
