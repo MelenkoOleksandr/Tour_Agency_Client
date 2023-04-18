@@ -22,6 +22,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+
+import { rootReducer } from './store/root.reducer';
+import { initialState } from './store/auth/auth.reducer';
+import { AuthEffects } from './store/auth/auth.effect';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,6 +49,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
     MatIconModule,
@@ -48,6 +57,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    StoreModule.forRoot(rootReducer, { initialState: { auth: initialState } }),
+    EffectsModule.forRoot(AuthEffects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
