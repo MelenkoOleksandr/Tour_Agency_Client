@@ -17,21 +17,31 @@ import { TourCardComponent } from './components/tour-card/tour-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
+
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
 import { rootReducer } from './store/root.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { initialState } from './store/root.reducer';
 import { TourEffects } from './store/tour/tour.effects';
+import { CreateTourComponent } from './pages/create-tour/create-tour.component';
+import { TokenInterceptor } from './token.inteceptor';
 
 @NgModule({
   declarations: [
@@ -46,6 +56,7 @@ import { TourEffects } from './store/tour/tour.effects';
     HeaderComponent,
     SearchComponent,
     TourCardComponent,
+    CreateTourComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,18 +65,30 @@ import { TourEffects } from './store/tour/tour.effects';
     HttpClientModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
+
     MatIconModule,
     MatButtonModule,
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatNativeDateModule,
+
     StoreModule.forRoot(rootReducer, { initialState: initialState }),
     EffectsModule.forRoot(AuthEffects, TourEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

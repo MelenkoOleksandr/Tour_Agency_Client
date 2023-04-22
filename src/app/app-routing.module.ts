@@ -7,6 +7,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { CreateTourComponent } from './pages/create-tour/create-tour.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: ToursComponent,
   },
+  {path: 'tours/create', component: CreateTourComponent},
   { path: 'tour/:id', component: TourComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },

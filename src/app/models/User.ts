@@ -15,6 +15,11 @@ export interface IUserCredentials {
   password: string;
 }
 
+export interface IUserRegisterCredentials extends IUserCredentials {
+  name: string;
+  userType: UserType;
+}
+
 export interface AuthResponse {
   user: IUser;
   refreshToken: string;

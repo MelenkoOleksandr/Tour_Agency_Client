@@ -5,6 +5,9 @@ import {
   loginFailure,
   logout,
   loadUser,
+  register,
+  registerSuccess,
+  registerFailure,
 } from './auth.actions';
 import { IUser } from 'src/app/models/User';
 
@@ -30,7 +33,12 @@ export const authReducer = createReducer(
   on(loginSuccess, (state, authData) => {
     localStorage.setItem('user', JSON.stringify(authData.user));
     localStorage.setItem('refreshToken', authData.refreshToken);
-    return { ...state, isAuthenticated: true, user: authData.user, error: null };
+    return {
+      ...state,
+      isAuthenticated: true,
+      user: authData.user,
+      error: null,
+    };
   }),
   on(loginFailure, (state, { error }) => ({
     ...state,
@@ -38,8 +46,26 @@ export const authReducer = createReducer(
     user: null,
     error,
   })),
+  on(register, (state) => ({ ...state, error: null })),
+  on(registerSuccess, (state, authData) => {
+    localStorage.setItem('user', JSON.stringify(authData.user));
+    localStorage.setItem('refreshToken', authData.refreshToken);
+    return {
+      ...state,
+      isAuthenticated: true,
+      user: authData.user,
+      error: null,
+    };
+  }),
+  on(registerFailure, (state, { error }) => ({
+    ...state,
+    isAuthenticated: false,
+    user: null,
+    error,
+  })),
   on(logout, (state) => {
     localStorage.removeItem('user');
+    localStorage.removeItem('refreshToken');
     return { ...state, isAuthenticated: false, user: null, error: null };
   })
 );

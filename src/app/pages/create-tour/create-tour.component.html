@@ -1,0 +1,84 @@
+<form [formGroup]="formGroup" class="tour-form">
+  <mat-form-field>
+    <input matInput formControlName="title" placeholder="Title" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select formControlName="type">
+      <mat-option value="EXCURSION">Excursion</mat-option>
+      <mat-option value="OTHER">Other</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Description"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="image" placeholder="Image URL" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="number" matInput formControlName="price" placeholder="Price" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="number"
+      matInput
+      formControlName="availablePlaces"
+      placeholder="Available Places"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="startDatePicker"
+      formControlName="startDate"
+      placeholder="Start Date"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="startDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="endDatePicker"
+      formControlName="endDate"
+      placeholder="End Date"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="endDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="isHot">Is Hot</mat-checkbox>
+
+  <mat-form-field *ngIf="formGroup.get('isHot')!.value">
+    <input matInput formControlName="hotDiscount" placeholder="Hot Discount" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="departurePlace"
+      placeholder="Departure Place"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="country" placeholder="Country" />
+  </mat-form-field>
+  <button mat-raised-button color="primary">Submit</button>
+</form>

@@ -1,5 +1,18 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="register-form">
   <h1>Register</h1>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="Enter your name"
+      formControlName="name"
+      required
+    />
+    <mat-error *ngIf="name?.invalid">{{ getErrorMessage("name") }}</mat-error>
+  </mat-form-field>
+
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
     <input

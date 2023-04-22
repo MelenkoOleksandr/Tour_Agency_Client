@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthResponse, IUserCredentials } from '../models/User';
+import {
+  AuthResponse,
+  IUserCredentials,
+  IUserRegisterCredentials,
+} from '../models/User';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,7 +23,7 @@ export class AuthService {
     ) as Observable<AuthResponse>;
   }
 
-  register(userCredentials: IUserCredentials) {
+  register(userCredentials: IUserRegisterCredentials) {
     return this.http.post(
       'http://localhost:8080/api/auth/register',
       userCredentials,
@@ -27,5 +31,22 @@ export class AuthService {
         withCredentials: true,
       }
     ) as Observable<AuthResponse>;
+  }
+
+  refreshToken() {
+    const refreshToken = localStorage.getItem('refreshToken') as string;
+    if (!refreshToken) {
+      throw new Error('No refresh token');
+    }
+
+    return this.http.post('http://localhost:8080/api/refreshToken', {
+      refreshToken,
+    }) as Observable<string>;
+  }
+
+  logout() {
+    return this.http.delete('http://localhost:8080/api/auth/refreshToken', {
+      withCredentials: true,
+    }) as Observable<unknown>;
   }
 }
