@@ -5,7 +5,7 @@ import {
   HttpHandler,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { AppState } from './store/root.reducer';
@@ -23,15 +23,12 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          console.log('Token expired', request);
-          this.authService.refreshToken()
           return this.authService.refreshToken().pipe(
             switchMap(() => {
-              console.log('Token refreshed');
-
               const authReqWithCookie = request.clone({
                 withCredentials: true,
               });
+
               return next.handle(authReqWithCookie);
             }),
             catchError((refreshError) => {

@@ -5,14 +5,22 @@
       <ul class="nav-list">
         <li class="nav-link"><a routerLink="/">Tours</a></li>
         <li class="nav-link"><a routerLink="/about">About</a></li>
-        <li class="nav-link" *ngIf="user; else login">
-          <button
-            aria-label="Example icon button with a vertical three dot icon"
-          >
-            {{ user.name ?? "Username" }}
-          </button>
-          <button (click)="logout()">Logout</button>
+        <li
+          class="nav-link"
+          *ngIf="user; else login"
+          mat-button
+          [matMenuTriggerFor]="menu"
+        >
+          {{ user.name ?? "Username" }}
         </li>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item routerLink="/profile">Profile</a>
+          <a mat-menu-item routerLink="/bookings">Bookings</a>
+          <a *ngIf="isTravelAgent || isAdmin" mat-menu-item routerLink="/agent-tours" >My Tours</a>
+          <a *ngIf="isTravelAgent || isAdmin" mat-menu-item routerLink="/tours/create">Add Tour</a>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+
         <ng-template #login>
           <a routerLink="/login">Login</a>
         </ng-template>

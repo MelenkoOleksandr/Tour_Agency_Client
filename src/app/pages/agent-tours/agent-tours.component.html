@@ -1,0 +1,58 @@
+<table
+  *ngIf="tours && tours.length > 0"
+  mat-table
+  [dataSource]="tours"
+  class="mat-elevation-z8"
+>
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+  </ng-container>
+  <ng-container matColumnDef="availablePlaces">
+    <th mat-header-cell *matHeaderCellDef>Available</th>
+    <td mat-cell *matCellDef="let element">{{ element.availablePlaces }}</td>
+  </ng-container>
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef>Start</th>
+    <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+  </ng-container>
+  <ng-container matColumnDef="endDate">
+    <th mat-header-cell *matHeaderCellDef>End</th>
+    <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+  </ng-container>
+  <ng-container matColumnDef="isHot">
+    <th mat-header-cell *matHeaderCellDef>Hot</th>
+    <td mat-cell *matCellDef="let element">{{ element.isHot }}</td>
+  </ng-container>
+  <ng-container matColumnDef="hotDiscount">
+    <th mat-header-cell *matHeaderCellDef>Hot Discount</th>
+    <td mat-cell *matCellDef="let element">{{ element.hotDiscount }}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="['/tours/edit', element.id]" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </a>
+      <button (click)="deleteTour(element.id)" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

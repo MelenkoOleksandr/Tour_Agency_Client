@@ -39,12 +39,17 @@ export class AuthService {
       throw new Error('No refresh token');
     }
 
-    return this.http.post('http://localhost:8080/api/refreshToken', {
-      refreshToken,
-    }) as Observable<string>;
+    return this.http.post(
+      'http://localhost:8080/api/refreshToken',
+      { refreshToken },
+      { withCredentials: true }
+    ) as Observable<string>;
   }
 
   logout() {
+    // Check why cookies are not being deleted
+    // Clear access token cookie
+    document.cookie =  'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     return this.http.delete('http://localhost:8080/api/auth/refreshToken', {
       withCredentials: true,
     }) as Observable<unknown>;

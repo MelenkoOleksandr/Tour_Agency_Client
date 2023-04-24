@@ -8,6 +8,8 @@ import {
   loginFailure,
   loginSuccess,
   logout,
+  logoutFailure,
+  logoutSuccess,
   register,
   registerFailure,
   registerSuccess,
@@ -42,7 +44,12 @@ export class AuthEffects {
       ofType(register),
       mergeMap((action) =>
         this.authService
-          .register(action) // { email, password, name, userType }
+          .register({
+            email: action.email,
+            password: action.password,
+            name: action.name,
+            userType: action.userType,
+          })
           .pipe(
             map((response: AuthResponse) => registerSuccess(response)),
             catchError((error) => of(registerFailure({ error })))
@@ -63,7 +70,12 @@ export class AuthEffects {
   logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(logout),
-      // mergeMap(() => this.authService.logout()),
+      mergeMap(() =>
+        of(this.authService.logout()).pipe(
+          map(() => logoutSuccess()),
+          catchError((error) => of(logoutFailure()))
+        )
+      ),
       tap(() => this.router.navigate(['/login']))
     )
   );

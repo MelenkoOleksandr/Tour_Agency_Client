@@ -38,6 +38,14 @@
     </button>
   </mat-form-field>
 
+  <mat-form-field appearance="fill">
+  <mat-label>User Type</mat-label>
+  <mat-select formControlName="userType">
+    <mat-option value="CUSTOMER">Customer</mat-option>
+    <mat-option value="TRAVEL_AGENT">Agent</mat-option>
+  </mat-select>
+</mat-form-field>
+
   <button mat-raised-button type="submit" [disabled]="this.form.invalid">
     Register
   </button>

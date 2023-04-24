@@ -15,6 +15,7 @@ export class RegisterComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     name: ['', [Validators.required]],
+    userType: ['CUSTOMER'],
   });
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {}
@@ -47,7 +48,7 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.store.dispatch(register({ ...this.form.value, userType: 'CUSTOMER' }));
+      this.store.dispatch(register(this.form.value));
     }
   }
 }

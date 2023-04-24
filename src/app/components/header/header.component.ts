@@ -23,4 +23,12 @@ export class HeaderComponent {
   logout() {
     this.store.dispatch(logout());
   }
+
+  get isAdmin(): boolean {
+    return this.user?.userType === 'ADMIN';
+  }
+
+  get isTravelAgent(): boolean {
+    return this.user?.userType === 'TRAVEL_AGENT';
+  }
 }

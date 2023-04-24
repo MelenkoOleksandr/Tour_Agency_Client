@@ -27,8 +27,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
-
-
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -42,6 +42,8 @@ import { initialState } from './store/root.reducer';
 import { TourEffects } from './store/tour/tour.effects';
 import { CreateTourComponent } from './pages/create-tour/create-tour.component';
 import { TokenInterceptor } from './token.inteceptor';
+import { AgentToursComponent } from './pages/agent-tours/agent-tours.component';
+import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { TokenInterceptor } from './token.inteceptor';
     SearchComponent,
     TourCardComponent,
     CreateTourComponent,
+    AgentToursComponent,
+    EditTourComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,8 @@ import { TokenInterceptor } from './token.inteceptor';
     MatSelectModule,
     MatCheckboxModule,
     MatNativeDateModule,
+    MatMenuModule,
+    MatTableModule,
 
     StoreModule.forRoot(rootReducer, { initialState: initialState }),
     EffectsModule.forRoot(AuthEffects, TourEffects),
@@ -87,7 +93,7 @@ import { TokenInterceptor } from './token.inteceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })
