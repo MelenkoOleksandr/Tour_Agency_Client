@@ -1,32 +1,32 @@
 <section class="tour">
   <div class="tour-wrapper">
     <div class="tour-img">
-      <img [src]="tour.image" class="tour-img" />
+      <img [src]="tour?.image" class="tour-img" />
     </div>
     <div class="tour-details">
       <h2 class="tour-title">
-        {{ tour.title }} | <span>{{ tour.type }}</span>
+        {{ tour?.title }} | <span>{{ tour?.type }}</span>
       </h2>
-      <h3 class="tour-country">{{ tour.country }}</h3>
+      <h3 class="tour-country">{{ tour?.country }}</h3>
       <h3 class="tour-date">{{ days }}</h3>
-      <h3 class="tour-departure">Departure: {{ tour.departurePlace }}</h3>
-      <h3 class="tour-price">Price: {{ tour.price }}$</h3>
+      <h3 class="tour-departure">Departure: {{ tour?.departurePlace }}</h3>
+      <h3 class="tour-price">Price: {{ tour?.price }}$</h3>
 
       <p class="available-places">
-        There are only: {{ tour.availablePlaces }} places left!
+        There are only: {{ tour?.availablePlaces }} places left!
       </p>
       <button
         class="book-btn"
         mat-raised-button
         color="primary"
-        (click)="handleBuyTour()"
+        (click)="openBookModal()"
       >
         book now
       </button>
     </div>
   </div>
   <h2 class="tour-desc-title">Description</h2>
-  <p class="tour-desc">{{ tour.description }}</p>
+  <p class="tour-desc">{{ tour?.description }}</p>
   <div class="similar-tours">
     <h2 class="similar-tours-title">Similar tours</h2>
     <div class="similar-tours-container">

@@ -6,7 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ToursComponent } from './pages/tours/tours.component';
-import { TourComponent } from './pages/tour/tour.component';
+import {
+  BookTourDialogComponent,
+  TourComponent,
+} from './pages/tour/tour.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -14,6 +17,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 
+import { AuthModule } from '@auth0/auth0-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +33,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -61,6 +66,7 @@ import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
     CreateTourComponent,
     AgentToursComponent,
     EditTourComponent,
+    BookTourDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +87,15 @@ import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
     MatNativeDateModule,
     MatMenuModule,
     MatTableModule,
+    MatDialogModule,
 
+    AuthModule.forRoot({
+      domain: 'dev-20ngumnk3sv4cfcn.us.auth0.com',
+      clientId: 'Nc9525OFhxUj4wgfFjizVPhH8FTP32mx',
+      authorizationParams: {
+        redirect_uri: window.location.origin,
+      },
+    }),
     StoreModule.forRoot(rootReducer, { initialState: initialState }),
     EffectsModule.forRoot(AuthEffects, TourEffects),
     StoreDevtoolsModule.instrument({

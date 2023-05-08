@@ -16,13 +16,39 @@
         <mat-menu #menu="matMenu">
           <a mat-menu-item routerLink="/profile">Profile</a>
           <a mat-menu-item routerLink="/bookings">Bookings</a>
-          <a *ngIf="isTravelAgent || isAdmin" mat-menu-item routerLink="/agent-tours" >My Tours</a>
-          <a *ngIf="isTravelAgent || isAdmin" mat-menu-item routerLink="/tours/create">Add Tour</a>
+          <a
+            *ngIf="isTravelAgent || isAdmin"
+            mat-menu-item
+            routerLink="/agent-tours"
+            >My Tours</a
+          >
+          <a
+            *ngIf="isTravelAgent || isAdmin"
+            mat-menu-item
+            routerLink="/tours/create"
+            >Add Tour</a
+          >
           <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
 
         <ng-template #login>
           <a routerLink="/login">Login</a>
+        </ng-template>
+
+        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+          <button
+            (click)="
+              auth.logout({
+                logoutParams: { returnTo: document.location.origin }
+              })
+            "
+          >
+            Log out
+          </button>
+        </ng-container>
+
+        <ng-template #loggedOut>
+          <button (click)="auth.loginWithRedirect()">Log in</button>
         </ng-template>
       </ul>
     </nav>
