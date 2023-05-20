@@ -2,12 +2,8 @@
   <input
     type="text"
     matInput
+    [(ngModel)]="searchQuery"
+    (input)="onSearchChange()"
     placeholder="Search"
-    [formControl]="searchControl"
   />
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-    <mat-option *ngFor="let result of filteredResults | async" [value]="result">
-      {{ result.name }}
-    </mat-option>
-  </mat-autocomplete>
 </mat-form-field>

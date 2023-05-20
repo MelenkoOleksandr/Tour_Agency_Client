@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IReservation } from '../models/Reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +9,10 @@ import { Injectable } from '@angular/core';
 export class ReservationsService {
   constructor(private http: HttpClient) {}
 
-  getReservations() {
-    return this.http.get('http://localhost:8080/api/reservations');
+  getReservations(): Observable<IReservation[]> {
+    return this.http.get(
+      'http://localhost:8080/api/reservations'
+    ) as Observable<IReservation[]>;
   }
 
   reserveTour(tourId: number, amount: number) {

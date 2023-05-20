@@ -11,14 +11,13 @@ import {
   TourComponent,
 } from './pages/tour/tour.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AboutComponent } from './pages/about/about.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
 import { TourCardComponent } from './components/tour-card/tour-card.component';
 
 import { AuthModule } from '@auth0/auth0-angular';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -49,6 +48,8 @@ import { CreateTourComponent } from './pages/create-tour/create-tour.component';
 import { TokenInterceptor } from './token.inteceptor';
 import { AgentToursComponent } from './pages/agent-tours/agent-tours.component';
 import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { ReservationEffects } from './store/reservation/reservation.effects';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,6 @@ import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
     ToursComponent,
     TourComponent,
     NotFoundComponent,
-    AboutComponent,
     ProfileComponent,
     HeaderComponent,
     SearchComponent,
@@ -67,11 +67,13 @@ import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
     AgentToursComponent,
     EditTourComponent,
     BookTourDialogComponent,
+    ReservationsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     NoopAnimationsModule,
     BrowserAnimationsModule,
@@ -97,7 +99,7 @@ import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
       },
     }),
     StoreModule.forRoot(rootReducer, { initialState: initialState }),
-    EffectsModule.forRoot(AuthEffects, TourEffects),
+    EffectsModule.forRoot(AuthEffects, TourEffects, ReservationEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

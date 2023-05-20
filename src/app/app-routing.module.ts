@@ -5,11 +5,11 @@ import { TourComponent } from './pages/tour/tour.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AboutComponent } from './pages/about/about.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { CreateTourComponent } from './pages/create-tour/create-tour.component';
 import { AgentToursComponent } from './pages/agent-tours/agent-tours.component';
 import { EditTourComponent } from './pages/edit-tour/edit-tour.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
 
 const routes: Routes = [
   {
@@ -17,6 +17,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: ToursComponent,
   },
+  { path: 'reservations', component: ReservationsComponent},
   { path: 'agent-tours', component: AgentToursComponent },
   { path: 'tours/edit/:id', component: EditTourComponent },
   { path: 'tours/create', component: CreateTourComponent },
@@ -24,7 +25,6 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'about', component: AboutComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

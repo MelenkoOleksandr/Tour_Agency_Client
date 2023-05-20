@@ -1,10 +1,16 @@
 <div class="tours">
-  <app-search></app-search>
+  <app-search (searchQueryChange)="onSearchQueryChange($event)"></app-search>
   <section class="tours-container">
     <h2 class="tours-container__title">Our Tours</h2>
 
     <div class="tours-container__list">
-      <app-tour-card *ngFor="let tour of tours" [tour]="tour"></app-tour-card>
+      <app-tour-card
+        *ngFor="let tour of filteredTours"
+        [tour]="tour"
+      ></app-tour-card>
+      <h3 *ngIf="tours.length === 0" class="tours-container__no-tours">
+        No tours found. You need to login to see the tours
+      </h3>
     </div>
   </section>
 </div>

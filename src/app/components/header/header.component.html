@@ -4,7 +4,6 @@
     <nav class="header-nav">
       <ul class="nav-list">
         <li class="nav-link"><a routerLink="/">Tours</a></li>
-        <li class="nav-link"><a routerLink="/about">About</a></li>
         <li
           class="nav-link"
           *ngIf="user; else login"
@@ -15,7 +14,7 @@
         </li>
         <mat-menu #menu="matMenu">
           <a mat-menu-item routerLink="/profile">Profile</a>
-          <a mat-menu-item routerLink="/bookings">Bookings</a>
+          <a mat-menu-item routerLink="/reservations">Reservations</a>
           <a
             *ngIf="isTravelAgent || isAdmin"
             mat-menu-item
@@ -29,13 +28,13 @@
             >Add Tour</a
           >
           <button mat-menu-item (click)="logout()">Logout</button>
+
+          <ng-template #login>
+            <li class="nav-link"><a routerLink="/login">Login</a></li>
+          </ng-template>
         </mat-menu>
 
-        <ng-template #login>
-          <a routerLink="/login">Login</a>
-        </ng-template>
-
-        <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+        <!-- <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
           <button
             (click)="
               auth.logout({
@@ -49,7 +48,7 @@
 
         <ng-template #loggedOut>
           <button (click)="auth.loginWithRedirect()">Log in</button>
-        </ng-template>
+        </ng-template> -->
       </ul>
     </nav>
   </div>

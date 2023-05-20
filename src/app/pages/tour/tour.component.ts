@@ -5,7 +5,11 @@ import { Store } from '@ngrx/store';
 import { ITour } from 'src/app/models/Tour';
 import { AppState } from 'src/app/store/root.reducer';
 import { TourActions } from 'src/app/store/tour/tour.actions';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ReservationsService } from './../../services/reservations.service';
 
 @Component({
@@ -72,7 +76,8 @@ export class BookTourDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { tourId: number },
-    private reservationsService: ReservationsService
+    private reservationsService: ReservationsService,
+    private dialogRef: MatDialogRef<BookTourDialogComponent>
   ) {}
 
   bookTour() {
@@ -81,5 +86,6 @@ export class BookTourDialogComponent {
       .subscribe((res) => {
         console.log(res);
       });
+    this.dialogRef.close();
   }
 }

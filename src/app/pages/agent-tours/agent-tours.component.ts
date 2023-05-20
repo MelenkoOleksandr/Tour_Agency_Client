@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ITour } from 'src/app/models/Tour';
 import { AppState } from 'src/app/store/root.reducer';
@@ -10,7 +10,7 @@ import { withLatestFrom } from 'rxjs/operators';
   templateUrl: './agent-tours.component.html',
   styleUrls: ['./agent-tours.component.css'],
 })
-export class AgentToursComponent {
+export class AgentToursComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'type',
@@ -41,6 +41,6 @@ export class AgentToursComponent {
   }
 
   deleteTour(id: number) {
-    this.tours = this.tours.filter((tour) => tour.id !== id);
+    this.store.dispatch(TourActions.deleteTour({ id }));
   }
 }

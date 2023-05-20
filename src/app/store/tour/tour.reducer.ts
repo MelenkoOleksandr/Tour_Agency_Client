@@ -87,12 +87,16 @@ export const tourReducer = createReducer(
     isLoading: true,
     error: null,
   })),
-  on(TourActions.deleteTourSuccess, (state, { id }) => ({
-    ...state,
-    tours: state.tours.filter((t) => t.id !== id),
-    isLoading: false,
-    error: null,
-  })),
+  on(TourActions.deleteTourSuccess, (state, { id }) => {
+    console.log('deleteTourSuccess', id);
+
+    return {
+      ...state,
+      tours: state.tours.filter((t) => t.id !== id),
+      isLoading: false,
+      error: null,
+    };
+  }),
   on(TourActions.deleteTourFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
